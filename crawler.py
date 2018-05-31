@@ -4,24 +4,34 @@ import urllib.request
 source = urllib.request.urlopen('https://pythonprogramming.net/parsememcparseface/').read()
 soup = bs.BeautifulSoup(source, 'lxml')
 
-#print(soup.find_all('p'))
+###print(soup.find_all('p'))
+##
+###print(soup.get_text())
+##
+###for url in soup.find_all('a'):
+##    #print(url.get('href'))
+##
+##nav = soup.nav
+###print(nav)
+##
+###for url in nav.find_all('a'):
+###    print(url.get('href'))
+##
+##
+####body = soup.body
+####for paragraph in body.find_all('p'):
+####    print(paragraph.text)
+##
+##
+##for div in soup.find_all('div', class_='body'):
+##    print(div.text)
 
-#print(soup.get_text())
+#table = soup.table
+table = soup.find('table')
 
-#for url in soup.find_all('a'):
-    #print(url.get('href'))
+table_rows = table.find_all('tr')
 
-nav = soup.nav
-#print(nav)
-
-#for url in nav.find_all('a'):
-#    print(url.get('href'))
-
-
-##body = soup.body
-##for paragraph in body.find_all('p'):
-##    print(paragraph.text)
-
-
-for div in soup.find_all('div', class_='body'):
-    print(div.text)
+for tr in table_rows:
+    td = tr.find_all('td')
+    row = [i.text for i in td]
+    print(row)
