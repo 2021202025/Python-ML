@@ -1,16 +1,77 @@
+import sys
+from PyQt4.QtGui import QApplication
+from PyQt4.QtCore import QUrl
+from PyQt4.QtWebKit import QWebPage
 import bs4 as bs
 import urllib.request
 import pandas as pd
 
+class Client(QWebPage):
+    def__init__(self, url):
+        self.app = QApplication(sys.argv)
+        QWebPage.__init__(self)
+        self.loafFinished.connect(self.on_page_load)
 
-source = urllib.request.urlopen('https://pythonprogramming.net/sitemap.xml').read()
-soup = bs.BeautifulSoup(source, 'xml')
 
-for url in soup.find_all('loc'):
-    print(url.text)
+        def on_page_load(self):
+            self.app.quit()
 
-##source = urllib.request.urlopen('https://pythonprogramming.net/parsememcparseface/').read()
-##soup = bs.BeautifulSoup(source, 'lxml')
+
+url = 'https://pythonprogramming.net/parsememcparseface/'
+client_response = Client(url)
+source = client_response.mainFrame().toHTML()
+
+##source = urllib.request.urlopen('https://pythonprogramming.net/sitemap.xml').read()
+##soup = bs.BeautifulSoup(source, 'xml')
+
+
+source = urllib.request.urlopen('https://pythonprogramming.net/parsememcparseface/').read()
+soup = bs.BeautifulSoup(source, 'lxml')
+
+js_test = soup.find('p', class_='jstest')
+print(js_test.text)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##for url in soup.find_all('loc'):
+##    print(url.text)
 
 ###print(soup.find_all('p'))
 ##
